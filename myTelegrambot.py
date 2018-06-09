@@ -35,7 +35,8 @@ while True:
     
     s, chat_id, date, first_name = getupdates()
     min = time.strftime("%M")
-    
+    textm = "new hour!"
+    sendm()
     if min=="00":
         textm = "new hour!"
         sendm()
@@ -62,6 +63,6 @@ while True:
         datep = date
         
     
-    time.sleep(1)
+    time.sleep(10)
     
 
