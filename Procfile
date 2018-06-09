@@ -1,1 +1,1 @@
-web: python myTelegrambot.py -p 5000
+web: python myTelegrambot.py -p 8080
