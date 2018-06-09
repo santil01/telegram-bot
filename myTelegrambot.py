@@ -3,7 +3,7 @@
 
 # In[38]:
 
-
+from retrying import retry
 import time
 import requests
 import datetime
@@ -12,6 +12,7 @@ token = "506337865:AAELIzsWuRF2Vw7HgcsHjATQd1SvH31Hr30"
 
 def Time():
     return time.strftime("%M")
+@retry
 def Btc():
     b = requests.get("https://bittrex.com/api/v1.1/public/getmarketsummary?market=USD-BTC")
     b = b.json()
@@ -19,6 +20,7 @@ def Btc():
     return b
 pull = {"Hello":"Hello Billionaire", "Hi":"hey", "Btc":Btc()}
 datep = 0
+@retry
 def getupdates():
     s = requests.get("https://api.telegram.org/bot" + token +"/getupdates", proxies=dict(http='socks5://telegram:telegram@hvmas.tgproxy.me:1080', https='socks5://telegram:telegram@hvmas.tgproxy.me:1080'))
     s = s.json()
@@ -28,6 +30,7 @@ def getupdates():
     first_name = s['from']['first_name']
     s = s['text']
     return s, chat_id, date, first_name
+@retry
 def sendm():
     m = requests.get("https://api.telegram.org/bot" + token +"/sendMessage?chat_id=" + str(chat_id) + "&" + "text=" + str(textm), proxies=dict(http='socks5://telegram:telegram@hvmas.tgproxy.me:1080', https='socks5://telegram:telegram@hvmas.tgproxy.me:1080'))
 
@@ -35,8 +38,7 @@ while True:
     
     s, chat_id, date, first_name = getupdates()
     min = time.strftime("%M")
-    textm = "new hour!"
-    sendm()
+
     if min=="00":
         textm = "new hour!"
         sendm()
@@ -63,6 +65,6 @@ while True:
         datep = date
         
     
-    time.sleep(10)
+    time.sleep(1)
     
 
