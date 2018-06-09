@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # In[38]:
-from os import environ
+
 from retrying import retry
 import time
 import requests
@@ -35,7 +35,7 @@ def sendm():
     m = requests.get("https://api.telegram.org/bot" + token +"/sendMessage?chat_id=" + str(chat_id) + "&" + "text=" + str(textm), proxies=dict(http='socks5://telegram:telegram@hvmas.tgproxy.me:1080', https='socks5://telegram:telegram@hvmas.tgproxy.me:1080'))
 
 while True:
-    application.listen(environ["PORT"])
+    
     s, chat_id, date, first_name = getupdates()
     min = time.strftime("%M")
 
