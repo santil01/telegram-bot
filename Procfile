@@ -1,1 +1,1 @@
-web: python myTelegrambot.py -p $PORT
+web: python myTelegrambot.py -p 5000
