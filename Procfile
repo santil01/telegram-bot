@@ -1,1 +1,1 @@
-web: python myTelegrambot.py -p 8080
+worker: python myTelegrambot.py
