@@ -18,7 +18,7 @@ def date_initial():
     return date_old
 date_old = date_initial()   
 @retry
-def Weather():
+def Weatiher():
     w = requests.get('https://yandex.ru/pogoda/moscow').text 
     w = bs4.BeautifulSoup(w, 'html.parser') 
     w = w.find('span', class_="temp__value").next_element
@@ -80,7 +80,7 @@ while True:
         
 
         else:
-            textm = "Hi, " + first_name + ". \nPress the command.\nI know following commands: Btc, Time, Hello, Weather, Movie. \nBot version: 1.7"
+            textm = "Hi, " + first_name + ". \nPress the command.\nI know following commands: Btc, Time, Hello, Weather, Movie. \nBot version: 1.8"
         sendm()
         date_old = date
         
