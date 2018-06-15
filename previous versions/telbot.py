@@ -18,7 +18,7 @@ def date_initial():
     return date_old
 date_old = date_initial()   
 @retry
-def Weatiher():
+def Weather():
     w = requests.get('https://yandex.ru/pogoda/moscow').text 
     w = bs4.BeautifulSoup(w, 'html.parser') 
     w = w.find('span', class_="temp__value").next_element
