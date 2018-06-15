@@ -80,7 +80,7 @@ while True:
         
 
         else:
-            textm = "Hi, " + first_name + ". \nPress the command.\nI know following commands: Btc, Time, Hello, Weather, Movie. \nBot version: 1.8"
+            textm = "Hi, " + first_name + ". \nPress the command.\nI know following commands: Btc, Time, Hello, Weather, Movie. \nBot version: 1.9"
         sendm()
         date_old = date
         
