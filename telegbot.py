@@ -41,7 +41,12 @@ while True:
     s = requests.get("https://api.telegram.org/bot" + token +"/getupdates", proxies=dict(http=proxyt, https=proxyt)).json()
     s = s['result']
     length = len(s)
-    
+    min = time.strftime("%M")
+    if min=="00":
+        textm = "new hour!"
+        
+        sendme()
+        time.sleep(60)
     for i in reversed(range(length)):
         
    
