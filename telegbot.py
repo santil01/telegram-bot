@@ -34,12 +34,17 @@ def sendm():
 @retry
 def sendme():
     requests.get("https://api.telegram.org/bot" + token +"/sendMessage?chat_id=" + str(my_chat_id) + "&" + "text=" + str(textm), proxies=dict(http=proxyt, https=proxyt))
+@retry
+def get_update():
+    s = requests.get("https://api.telegram.org/bot" + token +"/getupdates", proxies=dict(http=proxyt, https=proxyt)).json()
+    s = s['result']
+    return s
 
 date_old = int(date_initial()) 
 
 while True:
-    s = requests.get("https://api.telegram.org/bot" + token +"/getupdates", proxies=dict(http=proxyt, https=proxyt)).json()
-    s = s['result']
+    
+    s = get_update()
     length = len(s)
     min = time.strftime("%M")
     if min=="00":
