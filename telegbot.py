@@ -4,7 +4,8 @@ import requests, bs4
 import datetime
 import json
 token = "506337865:AAELIzsWuRF2Vw7HgcsHjATQd1SvH31Hr30"
-proxyt = 'socks5://swcbbabh:aYEbh6q5gQ@c3po.vivalaresistance.info:3306'
+#token = "617205115:AAEQU4mIOxR336eM-8G23upstvSVUXoogpQ"
+proxyt = 'socks5://swcbbabh:aYEbh6q5gQ@ley.vivalaresistance.info:3306'
 my_chat_id = 210787766
 @retry
 def date_initial():
@@ -19,6 +20,13 @@ def Weather():
     w = bs4.BeautifulSoup(w, 'html.parser') 
     w = w.find('span', class_="temp__value").next_element
     return w
+@retry
+def joke():
+    j = requests.get('https://www.anekdot.ru/random/anekdot/').text 
+    j = bs4.BeautifulSoup(j, 'html.parser') 
+    j = j.find('div', class_="btn2")
+    j = j.find('div', class_="text").next_element
+    return j
 @retry
 def Time():
     return time.strftime("%M")
@@ -69,22 +77,26 @@ while True:
                 if chat_id!=my_chat_id:
                     textm = first_name + " " + ' wrote: ' + m
                     sendme()    
-                if m=="Btc":
+                if m=="/btc":
                     textm = Btc()                
-                elif m=="Weather":
-                    textm = Weather()
-                elif m=="Time":
+                elif m=="/weather":
+                    textm = 'In Moscow now' + str(Weather())
+                    
+                elif m=="/time":
                     textm = Time()
-                elif m=="Movie":
+#                elif m=="Joke":
+#                    print("1")
+#                    textm = joke()
+                elif m=="/movie":
                     textm = first_name + ', what the fuck, dude? Go hard or Go home!'                 
 
 
-                elif m=="Hello":
+                elif m=="/hello":
                     textm = "Hi, Billionaire!"                
 
 
                 else:
-                    textm = "Hi, " + first_name + ". \nPress the command.\nI know following commands: Btc, Time, Hello, Weather, Movie. \nBot version: 2.0"
+                    textm = "Hi, " + first_name + ". \nPress the command.\nI know following commands: Btc, Time, Hello, Weather, Movie, Joke. \nBot version: 2.2"
                 sendm()
                 with open('last_update_id.txt', 'w') as f:
                     f.write(str(update_id))
