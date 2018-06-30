@@ -5,7 +5,7 @@ def main():
     while True:
 
         s = get_update()
-        print("1")
+        
         length = len(s)
         min = time.strftime("%M")
         if min=="00":
