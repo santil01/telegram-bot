@@ -1,12 +1,14 @@
 from my_functions import *
 def main():
     date_old = int(date_initial()) 
-
+    one = False
     while True:
 
         s = get_update()
         
         length = len(s)
+        if length == 0:
+            one = True
         min = time.strftime("%M")
         if min=="00":
             textm = "new hour!"
@@ -16,11 +18,10 @@ def main():
         for i in reversed(range(length)):
 
 
-            if s[i]['update_id']==date_old:
+            if s[i]['update_id']==date_old or one:
 
-                if i!=(length-1):
-
-                    s = s[i+1]                
+                if i!=(length-1) or one:
+                    s = (lambda one: s[i+1] if not one else s[i])(one)             
                     update_id = s['update_id']
                     s = s['message']
                     chat_id = s['chat']['id']
@@ -44,6 +45,7 @@ def main():
                     with open('last_update_id.txt', 'w') as f:
                         f.write(str(update_id))
                     date_old = update_id 
+                    one = False
                 break
         time.sleep(1)
 if __name__ == "__main__":
